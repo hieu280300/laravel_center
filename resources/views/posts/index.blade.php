@@ -36,7 +36,7 @@
                     <tr>
                         <td scope="col">{{ $key+1 }}</td>
                         <td scope="col">{{ $post->name }}</td>
-                        <td scope="col">{{ $post->content}}</td>
+                        {{-- <td scope="col">{{ $post->$->content }}</td> --}}
                         <td scope="col">{{ $post->category->name }}</td>
                         <td>
                             <img src="{{ asset($post->thumbnail) }}" alt="{{ $post->name }}" class="img-flid" style="width:20px">
