@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FrontendController;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +20,21 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Route::get('/home',[FrontendController::class,'index']);
 
+Route::group(['prefix' =>'home', 'as' => 'home.'], function(){
+    Route::get('/home',[FrontendController::class,'home'])->name('hi');
+    Route::get('/index',[FrontendController::class,'index'])->name('index');
+    Route::get('/about',[FrontendController::class,'about'])->name('about');
+    Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
+    Route::get('/login',[FrontendController::class,'login'])->name('login');
+    Route::get('/journal',[FrontendController::class,'journal'])->name('journal');
+    Route::get('/journal1',[FrontendController::class,'journal1'])->name('journal1');
+    Route::get('/quickview',[FrontendController::class,'quickview'])->name('quickview');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');    
 
 Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
     Route::get('/list', [CategoryController::class, 'index'])->name('index');
