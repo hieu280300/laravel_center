@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
             foreach ($categories as $category) {
                 $dataInsert = [
                     'name' => Str::random(5),
-                    'content' => Str::random(10),
+                    // 'content' => Str::random(10),
                     'category_id' => $category->id,
                     'created_at' => $date,
                     'updated_at' => $date,

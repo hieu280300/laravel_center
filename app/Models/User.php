@@ -16,6 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+   
     protected $fillable = [
         'name',
         'email',
@@ -40,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // 1 user sẽ có nhiều tasks 
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
 }
+

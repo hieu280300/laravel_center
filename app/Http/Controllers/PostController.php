@@ -22,8 +22,8 @@ class PostController extends Controller
     {
         $data = [];
         // get list data of table posts
-        $posts = Post::with('category');
-        // add new param to search
+        $posts =Post::with('category');
+        // add new  param to search
         // search post name
         if (!empty($request->name)) {
             $posts = $posts->where('name', 'like', '%' . $request->name . '%');
@@ -84,7 +84,7 @@ class PostController extends Controller
             'thumbnail' => $thumbnailPath,
             'category_id' => $request->category_id,
         ];
-
+         dd($dataInsert);
         DB::beginTransaction();
 
         try {

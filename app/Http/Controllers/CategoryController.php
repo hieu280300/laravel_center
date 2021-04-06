@@ -21,8 +21,9 @@ class CategoryController extends Controller
         $data = [];
         $categories = Category::get();
         $categories = Category::paginate(2);
-        // dd($categories);
+        
         $data['categories'] = $categories;
+//  dd($categories);
         return view('categories.index', $data);
         // return view('categories.index', compact('categories'));
     }

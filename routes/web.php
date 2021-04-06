@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\TaskController;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
 
@@ -63,6 +64,15 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
+});
+Route::group(['prefix' => 'task', 'as' => 'task.'], function () {
+    Route::get('/list', [TaskController::class, 'index'])->name('index');
+    Route::get('/create', [TaskController::class, 'create'])->name('create');
+    Route::post('/store', [TaskController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [TaskController::class, 'show'])->name('show');
+    Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [TaskController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
 });
 
 Route::get('/sign_form', function () {
