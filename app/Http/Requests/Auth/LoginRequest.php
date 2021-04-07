@@ -43,6 +43,12 @@ class LoginRequest extends FormRequest
      */
     public function authenticate()
     {
+        // echo 123;
+        // dd($this->email);
+        //Ath::attempt() : để kiểm tra account có đúng hay sai?
+        //tức là laravel dùng câu lệnh
+        // select * from users where email =" email_nhap_vao"
+        //and password ="hash(pasword nhập vào)"
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->filled('remember'))) {

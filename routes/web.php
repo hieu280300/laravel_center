@@ -10,6 +10,7 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,25 +38,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');    
 
-Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
-    Route::get('/list', [CategoryController::class, 'index'])->name('index');
-    Route::get('/create', [CategoryController::class, 'create'])->name('create');
-    Route::post('/store', [CategoryController::class, 'store'])->name('store');
-    Route::get('/show/{id}', [CategoryController::class, 'show'])->name('show');
-    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
-    Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
-});
-
-Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
-    Route::get('/list', [PostController::class, 'index'])->name('index');
-    Route::get('/create', [PostController::class, 'create'])->name('create');
-    Route::post('/store', [PostController::class, 'store'])->name('store');
-    Route::get('/show/{id}', [PostController::class, 'show'])->name('show');
-    Route::get('/edit/{id}', [PostController::class, 'edit'])->name('edit');
-    Route::put('/update/{id}', [PostController::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [PostController::class, 'destroy'])->name('destroy');
-});
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('/list', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -108,6 +90,27 @@ Route::post('/signup', function (Request $request) {
             $path = $request->profile_picture->storeAs('images', $fileName);
             var_dump($path);
     }
+});
+Route::group(['middleware' => 'auth'],function(){
+    Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
+        Route::get('/list', [CategoryController::class, 'index'])->name('index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('create');
+        Route::post('/store', [CategoryController::class, 'store'])->name('store');
+        Route::get('/show/{id}', [CategoryController::class, 'show'])->name('show');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [CategoryController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+    
+    Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
+        Route::get('/list', [PostController::class, 'index'])->name('index');
+        Route::get('/create', [PostController::class, 'create'])->name('create');
+        Route::post('/store', [PostController::class, 'store'])->name('store');
+        Route::get('/show/{id}', [PostController::class, 'show'])->name('show');
+        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [PostController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [PostController::class, 'destroy'])->name('destroy');
+    });
 });
 // Route::get('/trangchu',function(){
 //     return view('pages.trangchu');

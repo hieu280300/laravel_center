@@ -13,7 +13,8 @@
 <body>
     {{-- header --}}
     @include('layouts.header')
-
+    {{--navigation--}}
+    @include('layouts.navigation_custom')
     {{-- menu --}}
     @include('layouts.menu')
 
