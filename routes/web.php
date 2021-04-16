@@ -8,7 +8,8 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\TaskController;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 /*
@@ -22,7 +23,7 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/home',[FrontendController::class,'index']);
+Route::get('/home',[FrontendController::class,'index']);
 
 Route::group(['prefix' =>'home', 'as' => 'home.'], function(){
     Route::get('/home',[FrontendController::class,'home'])->name('hi');
@@ -92,6 +93,7 @@ Route::post('/signup', function (Request $request) {
     }
 });
 Route::group(['middleware' => 'auth'],function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');	
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
         Route::get('/list', [CategoryController::class, 'index'])->name('index');
         Route::get('/create', [CategoryController::class, 'create'])->name('create');
@@ -112,7 +114,11 @@ Route::group(['middleware' => 'auth'],function(){
         Route::delete('/delete/{id}', [PostController::class, 'destroy'])->name('destroy');
     });
 });
+
 // Route::get('/trangchu',function(){
 //     return view('pages.trangchu');
 // });
 require __DIR__ . '/auth.php';
+Route::get('/',function(){
+    return view('welcome');
+});

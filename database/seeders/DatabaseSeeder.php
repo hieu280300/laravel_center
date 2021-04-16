@@ -13,9 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
-        CategorySeeder::class;
+        // \App\Models\User::factory(10)->create();
+        // CategorySeeder::class;
         // PostSeeder::class;
+        \App\Models\Admin::factory(10)->create();
 
     }
 }
